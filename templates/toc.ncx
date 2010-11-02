@@ -22,7 +22,7 @@
       <navLabel>
         <text>{{ entry['title'] }}</text>
       </navLabel>
-      <content src="content.html#id_{{ entry['index'] }}"/>
+      <content src="content-{{ entry['index'] }}.html"/>
     </navPoint>
     {% end %}
   </navMap>

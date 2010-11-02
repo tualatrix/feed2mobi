@@ -252,6 +252,23 @@ class Feed2mobi:
         fp.write(content)
         fp.close()
 
+    def create_content_file(self, index):
+        logging.info("Generate: content-%d.html" % (index + 1))
+        filename = 'content.html'
+
+        if self.template_path and os.path.isfile(self.template_path + filename):
+            t = template.Loader(self.template_path).load(filename)
+        else:
+            t = template.Template(self.templates[filename])
+
+        content = t.generate(entry=self.entries[index])
+
+        outfile = self.book_dir + 'content-%d.html' % (index + 1)
+
+        fp = open(outfile, 'wb')
+        fp.write(content)
+        fp.close()
+
     def down_image(self, url, referer=None):
         logging.info("Downimage: %s" % url)
         url = escape.utf8(url)
@@ -338,7 +355,6 @@ class Feed2mobi:
     
     def absolute_path(self, url, purl):
         """将相对路径的url转换为绝对路径"""
-        logging.info('Convert absolute url: %s to relative url: %s' % (url, purl))
         
         if re.match(r'^http(s)?://.*', url):
             return url
@@ -456,7 +472,7 @@ class Feed2mobi:
         else:
             self.logo_image = False
         
-        index,entries = 1,[]
+        index, entries = 0, []
         for entry in self.feed.entries:
             if self.xpath:
                 fulltext = self.get_fulltext(entry.link, self.xpath)
@@ -483,8 +499,11 @@ class Feed2mobi:
     
         self.max_index = index
         self.entries = entries
+        logging.info('There are %d entries/index: %d' % (len(self.entries), self.max_index))
         
-        self.create_file('content.html')
+        for i in xrange(self.max_index):
+            self.create_content_file(i)
+
         self.create_file('toc.html')
         self.create_file('toc.ncx')
         self.create_file('cover.html')

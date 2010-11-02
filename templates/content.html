@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
-    <title>{{ title }}</title>
+    <title>{{ entry['title'] }}</title>
     <style type="text/css">
         p
         {
@@ -21,19 +21,15 @@
     </style>
 </head>
 <body>
-    <div id="feedContent">
-        {% for entry in entries %}
-        <div class="entry">
-            <a name="#id_{{ entry['index'] }}"></a>
-            <h2><b>{{ entry['title'] }}</b></h2>
-            <div align="right"><small>By {{ entry['author'] }} | <label class="lastUpdated">Last updated {{ entry['updated'] }}</label></small></div>
-            
-            <div class="feedEntryContent">
-                {{ entry['summary'] }}
-            </div>
+    <div class="entry">
+        <h2><b>{{ entry['title'] }}</b></h2>
+
+        <div align="right"><small>By {{ entry['author'] }} | <label class="lastUpdated">Last updated {{ entry['updated'] }}</label></small></div>
+
+        <div class="feedEntryContent">
+            {{ entry['summary'] }}
         </div>
-        <mbp:pagebreak></mbp:pagebreak>
-        {% end %}
     </div>
+</div>
 </body>
 </html>

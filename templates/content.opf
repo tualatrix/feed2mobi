@@ -2,7 +2,7 @@
 <package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uuid_id">
 <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
     <dc:title>{{ title }}({{ create_date }})</dc:title>
-    <dc:language>zh-CN</dc:language>
+    <dc:language>en-US</dc:language>
     <!--<meta name="cover" content="My_Cover" />-->
     <dc:identifier id="uuid_id" opf:scheme="uuid">{{ uuid }}</dc:identifier>
     <dc:creator>feed2mobi</dc:creator>  
@@ -13,7 +13,9 @@
 </metadata>
 <manifest>
     <item id="cover" media-type="application/xhtml+xml" href="cover.html"></item>
-    <item id="content" media-type="application/xhtml+xml" href="content.html"></item>
+    {% for entry in entries %}
+    <item id="content" media-type="application/xhtml+xml" href="content-{{ entry['index'] }}.html"></item>
+    {% end %}
     <item id="toc" media-type="application/xhtml+xml" href="toc.html"></item>
     <item id="ncx" media-type="application/x-dtbncx+xml" href="toc.ncx"/>
     <!--<item id="My_Cover" media-type="image/gif" href="../wreading.jpeg"/>-->

@@ -6,3 +6,4 @@ feed2mobi 0.1.1
  - Limit the image size to 300 height
  - Add author, change updated style and full text support
  - Improve date and content of table
+ - Split articles to separated files

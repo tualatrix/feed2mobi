@@ -8,7 +8,7 @@
     <div>
     <h1><b>TABLE OF CONTENTS</b></h1>
     <ol>
-    {% for entry in entries %}<li><a href="content.html#id_{{ entry['index'] }}">{{ entry['title'] }}</a></li>{% end %}
+        {% for entry in entries %}<li><a href="content-{{ entry['index'] }}.html">{{ entry['title'] }}</a></li>{% end %}
     </ol>
     </div>
 </body>
