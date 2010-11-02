@@ -243,7 +243,7 @@ class Feed2mobi:
             #info = self.feed.feed.info,
             #author = self.feed.feed.author
             create_time = time.strftime('%B %d, %Y %H:%M'),
-            create_date = time.strftime('%B %d')
+            create_date = time.strftime('%B %d, %Y')
         )
         
         outfile = self.book_dir+filename
