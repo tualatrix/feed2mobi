@@ -28,7 +28,7 @@
     <div class="entry">
         <h2><b>{{ entry['title'] }}</b></h2>
 
-        <div align="right"><small>By {{ entry['author'] }} | <label class="lastUpdated">{{ entry['updated'] }}</label></small></div>
+        <div align="right"><small>{% if entry['author'] %}By {{ entry['author'] }} | {% end %}<label class="lastUpdated">{{ entry['updated'] }}</label></small></div>
 
         <div class="feedEntryContent">
             {{ entry['summary'] }}

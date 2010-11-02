@@ -487,7 +487,10 @@ class Feed2mobi:
                 if fulltext:
                     entry.summary = fulltext
             
-            summary =  self.parse_summary(entry.content[0]['value'], entry.link)
+            if hasattr(entry, 'content'):
+                summary =  self.parse_summary(entry.content[0]['value'], entry.link)
+            else:
+                summary =  self.parse_summary(entry.summary, entry.link)
             
             if 'guid' not in entry or not entry.guid:
                 entry.guid = entry.link
@@ -495,7 +498,7 @@ class Feed2mobi:
             entries.append({
                     'link':entry.link,
                     'title':entry.title,
-                    'author': entry.author,
+                    'author': getattr(entry, 'author', ''),
                     'updated':time.strftime('%B %d, %Y %H:%M', entry.updated_parsed),
                     'summary':summary,
                     'base':entry.summary_detail.base,
