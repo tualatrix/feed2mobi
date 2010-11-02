@@ -416,9 +416,14 @@ class Feed2mobi:
                     img['src'] = image
                     img['width'] = width
                     img['height'] = height
+
+                    # This make the image centered
+                    if img.parent.name == u'p' and img.parent.attrs == []:
+                        if len(img.parent.contents) == 1:
+                            img.parent['class'] = 'centered'
                 else:
                     img.extract()
-                    
+
             img_count = img_count + 1
         
         return soup.renderContents('utf-8')
