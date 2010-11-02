@@ -474,6 +474,8 @@ class Feed2mobi:
         
         index, entries = 0, []
         for entry in self.feed.entries:
+            index = index + 1
+
             if self.xpath:
                 fulltext = self.get_fulltext(entry.link, self.xpath)
                 
@@ -495,7 +497,6 @@ class Feed2mobi:
                     'uuid':uuid.uuid1(),
                     'index':index
                 })
-            index = index + 1
     
         self.max_index = index
         self.entries = entries
