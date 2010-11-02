@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <title>{{ title }}</title>
+    <style type="text/css">
+        .entry{
+            margin:15px 0;
+        }
+        .lastUpdated{
+            color:gray;
+        }
+        .feedEntryContent{
+            margin-top:10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="feedContent">
+        {% for entry in entries %}
+        <div class="entry">
+            <a name="#id_{{ entry['index'] }}"></a>
+            <h4>
+                <a href="{{ entry['link'] }}">{{ entry['title'] }}</a>
+                <small class="lastUpdated">{{ entry['updated'] }}</small>
+            </h4>
+            
+            <div class="feedEntryContent">
+                {{ entry['summary'] }}
+            </div>
+        </div>
+        {% end %}
+    </div>
+    <mbp:pagebreak></mbp:pagebreak>
+</body>
+</html>

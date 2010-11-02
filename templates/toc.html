@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <title>{{ title }}</title>
+</head>
+<body>
+    <div>
+     <h1><b>目录</b></h1>
+     <h2>Content</h2><br />
+    <ol>
+    {% for entry in entries %}<li><a href="content.html#id_{{ entry['index'] }}">{{ entry['title'] }}</a></li>{% end %}
+    </ol>
+    </div>
+</body>
+</html>
