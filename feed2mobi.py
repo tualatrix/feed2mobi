@@ -518,7 +518,7 @@ class Feed2mobi:
         if self.noimage:
             mobi_file = '%s_noimage.mobi' % self.ffname
         else:
-            mobi_file = '%s.mobi' % self.ffname
+            mobi_file = '%s-%s.mobi' % (self.ffname, time.strftime('%Y-%m-%d'))
         
         logging.info("Build mobi file: %s" % mobi_file)
         
