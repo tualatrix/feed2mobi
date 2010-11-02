@@ -14,7 +14,7 @@ import logging
 import Image
 
 import feedparser
-from BeautifulSoup import BeautifulSoup
+from BeautifulSoup import BeautifulSoup, Tag
 
 from utils import template
 from utils import escape
@@ -458,14 +458,13 @@ class Feed2mobi:
         
         index,entries = 1,[]
         for entry in self.feed.entries:
-            
             if self.xpath:
                 fulltext = self.get_fulltext(entry.link, self.xpath)
                 
                 if fulltext:
                     entry.summary = fulltext
             
-            summary =  self.parse_summary(entry.summary, entry.link)
+            summary =  self.parse_summary(entry.content[0]['value'], entry.link)
             
             if 'guid' not in entry or not entry.guid:
                 entry.guid = entry.link
@@ -473,7 +472,8 @@ class Feed2mobi:
             entries.append({
                     'link':entry.link,
                     'title':entry.title,
-                    'updated':time.strftime('%Y-%m-%d %H:%M:%S',entry.updated_parsed),
+                    'author': entry.author,
+                    'updated':time.strftime('%B %d, %Y %H:%M', entry.updated_parsed),
                     'summary':summary,
                     'base':entry.summary_detail.base,
                     'uuid':uuid.uuid1(),

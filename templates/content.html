@@ -4,6 +4,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
     <title>{{ title }}</title>
     <style type="text/css">
+        p
+        {
+            margin-top: 1em;
+            text-indent: 0em
+        }
         .entry{
             margin:15px 0;
         }
@@ -20,16 +25,14 @@
         {% for entry in entries %}
         <div class="entry">
             <a name="#id_{{ entry['index'] }}"></a>
-            <h4>
-                <a href="{{ entry['link'] }}">{{ entry['title'] }}</a>
-                <small class="lastUpdated">{{ entry['updated'] }}</small>
-            </h4>
+            <h2><b>{{ entry['title'] }}</b></h2>
+            <div align="right"><small>By {{ entry['author'] }} | <label class="lastUpdated">Last updated {{ entry['updated'] }}</label></small></div>
             
             <div class="feedEntryContent">
                 {{ entry['summary'] }}
             </div>
         </div>
-	<mbp:pagebreak></mbp:pagebreak>
+        <mbp:pagebreak></mbp:pagebreak>
         {% end %}
     </div>
 </body>
