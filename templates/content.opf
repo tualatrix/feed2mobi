@@ -14,7 +14,7 @@
 <manifest>
     <item id="cover" media-type="application/xhtml+xml" href="cover.html"></item>
     {% for entry in entries %}
-    <item id="content" media-type="application/xhtml+xml" href="content-{{ entry['index'] }}.html"></item>
+    <item id="content-{{ entry['index'] + 1 }}" media-type="application/xhtml+xml" href="content-{{ entry['index'] + 1 }}.html"></item>
     {% end %}
     <item id="toc" media-type="application/xhtml+xml" href="toc.html"></item>
     <item id="ncx" media-type="application/x-dtbncx+xml" href="toc.ncx"/>
@@ -23,7 +23,9 @@
 	
 <spine toc="ncx">
     <itemref idref="cover" linear="no"/>
-    <itemref idref="content"/>
+    {% for entry in entries %}
+    <itemref idref="content-{{ entry['index'] + 1 }}"/>
+    {% end %}
     <itemref idref="toc"/>
 </spine>
 
