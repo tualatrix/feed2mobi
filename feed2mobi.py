@@ -11,6 +11,7 @@ import uuid
 import socket
 import urllib2
 import logging
+import Image
 
 import feedparser
 from BeautifulSoup import BeautifulSoup
@@ -157,6 +158,22 @@ OPF_TEMPLATE = """<?xml version="1.0" encoding="utf-8"?>
 </package>
 """
 
+def make_thumbnail(filename, size=300):
+    pixbuf = Image.open(filename)
+
+    width, height = pixbuf.size
+
+    if height > size:
+        delta = height / size
+        width = int(width / delta)
+        pixbuf.thumbnail((width, size), Image.ANTIALIAS)
+        pixbuf.save(filename)
+
+def get_image_size(filename):
+    pixbuf = Image.open(filename)
+
+    return pixbuf.size
+
 class Feed2mobi:
     
     template_path = 'templates/'
@@ -281,6 +298,8 @@ class Feed2mobi:
             except Exception, e:
                 return False
 
+        make_thumbnail(fullname)
+
         return filename
     
     def get_fulltext(self, url, xpath):
@@ -377,7 +396,10 @@ class Feed2mobi:
                 image = self.down_image(image_url, link)
 
                 if image:
+                    width, height = get_image_size(self.book_dir + image)
                     img['src'] = image
+                    img['width'] = width
+                    img['height'] = height
                 else:
                     img.extract()
                     
