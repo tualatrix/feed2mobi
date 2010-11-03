@@ -407,7 +407,7 @@ class Feed2mobi:
             
             if self.noimage or img_count >= self.max_images:
                 img.extract()
-            else:
+            elif img.has_key('src'):
                 image_url = self.absolute_path(img['src'], link)
                 image = self.down_image(image_url, link)
 
